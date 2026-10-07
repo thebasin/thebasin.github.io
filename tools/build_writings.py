@@ -32,7 +32,7 @@ def build_writings(root, head, foot, write):
         html = shell + f'<main id="main"><article><div class="reading-heading"><a class="back" href="../{category}.html">← {category}</a>{metadata(entry)}<h1>{escape(entry["title"])}</h1><p class="reading-deck">{entry["blurb"]}</p></div>'
         if entry.get('pdf'):
             url = '../' + entry['pdf']
-            html += f'<div class="pdf-reading"><div class="pdf-actions"><a class="writing-read" href="{url}">open full essay ↗</a><a class="writing-read" href="{url}" download>download PDF ↓</a></div><p class="pdf-note">The complete essay, with figures, footnotes, and references.</p><object class="essay-pdf" data="{url}#view=FitH" type="application/pdf" aria-label="Fossil Fuel Freezeout, complete essay"><p><a href="{url}">Read the complete essay as a PDF.</a></p></object></div>'
+            html += f'<div class="pdf-reading"><div class="pdf-actions"><a class="writing-read" href="{url}">open full essay ↗</a><a class="writing-read" href="{url}" download>download PDF ↓</a></div><p class="pdf-note">The complete essay, with figures, footnotes, and references.</p><object class="essay-pdf" data="{url}#view=FitH" type="application/pdf" aria-label="{escape(entry["title"], quote=True)}, complete essay"><p><a href="{url}">Read the complete essay as a PDF.</a></p></object></div>'
         else:
             if entry.get('sections'):
                 html += '<details class="reading-contents"><summary>Contents <span aria-hidden="true">+</span></summary><ol>'
