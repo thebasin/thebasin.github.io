@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#eee7d8">
+<title>Basin — a living drawing · the basin</title>
+<meta name="description" content="An interactive ink-and-pigment drawing of production, branching, and conjunction. A wordless companion to the Anti-Oedipus reading map.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="living-drawing.css">
+<script src="living-drawing.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#world">Skip to the drawing</a>
+<header>
+<a class="brand" href="../../index.html">the basin</a>
+<nav aria-label="Drawing navigation"><a href="../../index.html#projects">← projects</a><a href="./">reading map ↗</a></nav>
+</header>
+<main>
+<canvas id="world" tabindex="0" aria-label="A moving abstract ink and pigment simulation" aria-describedby="drawing-description">Your browser needs canvas support to display this interactive drawing. Return to the <a href="./">Anti-Oedipus reading map</a>.</canvas>
+<p id="drawing-description" class="sr-only">Drag colored forms to change connections. Tap the three branching endpoints to open or close their paths. Sweep across a current to interrupt it; it slowly reconnects. Press and drag the field to stir it. With a keyboard: left and right select forms, W A S D move them, Enter toggles a selected branch, Space pauses, R restarts.</p>
+</main>
+<footer><h1>Basin <span> / a living drawing</span></h1><div class="controls"><button id="motion" type="button" aria-pressed="false">pause movement</button><button id="restart" type="button">start again</button><button id="show-help" type="button" aria-haspopup="dialog">how to play</button></div></footer>
+<dialog id="help" aria-labelledby="help-title">
+<button id="close-help" type="button" aria-label="Close instructions">×</button>
+<p class="eyebrow">A COMPANION TO ANTI-OEDIPUS</p>
+<h2 id="help-title">Follow a current.<br>Change its course.</h2>
+<p>An abstract field of production, branching, and conjunction, drawn in moving ink and pigment.</p>
+<p>Drag the colored forms to change their connections. Tap the three endpoints on the right to open or close a branch. Sweep across a current to interrupt it; it slowly reconnects. Drag the empty field to stir it.</p>
+<p><strong>With a keyboard</strong><br>Focus the drawing, then use ← / → to select a form and W A S D to move it. Enter opens or closes a selected branch. Space pauses; R starts again.</p>
+<p>Movement begins paused if you prefer reduced motion. You can resume it whenever you like.</p>
+<a href="./">Explore the reading map ↗</a>
+</dialog>
+</body>
+</html>

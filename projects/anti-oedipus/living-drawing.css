@@ -1,0 +1,30 @@
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;width:100%;overflow:hidden;background:#eee7d8;color:#524b43}
+body{overscroll-behavior:none;font-family:Georgia,'Times New Roman',serif}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+canvas:active{cursor:grabbing}
+main{position:fixed;inset:0}
+header,footer{position:fixed;left:0;right:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(18px,4vw,64px);pointer-events:none}
+header{top:0;background:linear-gradient(#eee7d8ee,#eee7d800)}
+footer{bottom:0;background:linear-gradient(#eee7d800,#eee7d8ee)}
+header a,footer button,dialog{pointer-events:auto}
+a{color:inherit;text-decoration:none}
+a:hover,button:hover{text-decoration:underline;text-underline-offset:5px}
+.brand{font-size:19px;font-style:italic}
+nav,.controls{display:flex;gap:22px;align-items:center;font-size:13px}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:transparent;padding:10px 0}
+h1{font-size:18px;font-weight:400;font-style:italic;margin:0}
+h1 span{font-size:13px}
+:focus-visible{outline:2px solid #258b83;outline-offset:5px}
+canvas:focus-visible{outline-offset:-5px}
+.skip{position:fixed;top:-100px;left:20px;z-index:3;padding:12px;background:#eee7d8}
+.skip:focus{top:10px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+dialog{max-width:500px;width:calc(100% - 36px);max-height:85dvh;overflow:auto;border:1px solid #b8b09a;background:#eee7d8;color:inherit;padding:32px}
+dialog::backdrop{background:#524b4355}
+#close-help{float:right;font-size:25px;padding:0 6px}
+.eyebrow{font:9px/1.5 Arial,sans-serif;letter-spacing:1.5px;margin-top:8px}
+h2{font-size:32px;font-weight:400;font-style:italic;line-height:1.15}
+dialog p{font-size:14px;line-height:1.7}
+dialog a{display:inline-block;margin:10px 0;border-bottom:1px solid #b8b09a;padding-bottom:4px}
+@media(max-width:600px){header,footer{padding:16px 18px}nav,.controls{gap:16px;font-size:12px}footer{align-items:flex-start;flex-direction:column;gap:5px}h1{font-size:16px}h1 span{font-size:12px}.controls{width:100%;justify-content:space-between}button{min-height:44px}dialog{padding:24px}}
