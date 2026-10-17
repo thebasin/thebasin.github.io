@@ -388,8 +388,23 @@ function drawChains(time,elapsed,moving) {
   });
 }
 
+// Avoid redrawing decorative scenes while the reader is elsewhere on the page.
+const visibleScenes = new Set();
+const sceneObserver = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) visibleScenes.add(entry.target);
+    else visibleScenes.delete(entry.target);
+  }
+}, {rootMargin:'100px'});
+document.querySelectorAll('.basin-illustration,.desiring-factory').forEach(el => sceneObserver.observe(el));
+const touchDevice = matchMedia('(pointer:coarse)');
 let lastFrame = 0, flowTime = 0, stillComposition = false;
 function moveFigures(now) {
+  if (lastFrame && ((touchDevice.matches && now-lastFrame < 1000/30) ||
+      (!visibleScenes.size && (flowTime > 0 || stillComposition)))) {
+    requestAnimationFrame(moveFigures);
+    return;
+  }
   const elapsed = lastFrame ? Math.min((now - lastFrame) / 1000, .1) : 0;
   lastFrame = now;
   const moving = !paused && !document.hidden;

@@ -10,7 +10,7 @@ def art(name):
  if name in ['bookshelf','films','records','places']:return living_art(name)
  if name not in ['bookshelf','films','records','places']:name='flow'
  suffix = 'supplied' if name != 'flow' else 'fine'
- return f'<img class="ink-drawing" src="assets/drawings/{name}-{suffix}.png" alt="" width="400" height="280">'
+ return f'<img class="ink-drawing" src="assets/drawings/{name}-{suffix}.webp" alt="" width="400" height="280">'
 def head(title,bodyclass=''):
  return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Books, films, records, writings, and projects collected by the basin."><title>{e(title) if title == 'the basin' else e(title) + ' — the basin'}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head>

@@ -11,3 +11,45 @@
 .node{color:var(--c);color:color-mix(in srgb,var(--c) 76%,var(--ink) 24%)}
 .node.lit,.node.selected{color:var(--c)}
 .legend>span:not(.legend-note){color:var(--ink)}
+
+/* Keep the page scrollable until the reader chooses to move the map. */
+#touchMap{display:none}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body:has(dialog[open]){overflow:hidden}
+dialog{max-height:calc(100dvh - 32px);overscroll-behavior:contain}
+@media(max-width:760px){
+ header{display:block;padding:16px 5% 0}
+ .brand{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap}
+ nav{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;margin-top:8px;align-items:center}
+ nav a,nav button{font-size:13px;line-height:1.4;min-height:44px;text-align:left;display:flex;align-items:center}
+ .intro{padding-top:28px}
+ h1{font-size:clamp(44px,13vw,60px);letter-spacing:-.05em;overflow-wrap:anywhere}
+ .tabs{display:grid;grid-template-columns:1fr 1fr}
+ .tabs button{min-height:44px;font-size:16px}
+ .search{margin:4px 0;flex-basis:100%}
+ .search input{font-size:16px;min-height:44px}
+ .filter{width:100%}.filter select{width:100%;max-width:none;min-height:44px;font-size:16px}
+ .map-options{gap:8px 18px;padding:12px 0}
+ .map-options label{width:100%}
+ .map-options select{font-size:16px;max-width:calc(100% - 55px);min-height:44px}
+ .map-options button{font-size:13px;min-height:44px}
+ #mapCanvas{height:clamp(320px,55svh,530px);touch-action:pan-y pinch-zoom}
+ #mapCanvas.map-interactive{touch-action:none}
+ #mapCanvas:not(.map-interactive) .mini-wrap{pointer-events:none}
+ #touchMap{display:inline-block}
+ .controls{gap:6px;justify-content:flex-start;flex-shrink:1;min-width:0;width:100%}
+ .controls button{min-width:44px;min-height:44px;font-size:13px}
+ .map-caption{gap:12px;padding-top:12px}
+ .legend{flex-wrap:wrap}
+ .section-tools{flex-wrap:wrap}
+ .note-text{overflow-wrap:anywhere}
+ .note-text table{display:block;overflow:auto;max-width:100%}
+ .toc button,.linkrow,.ref,.focus-btn{min-height:44px}
+ .startlinks{flex-direction:column;align-items:flex-start;gap:8px}
+ .startlinks button{min-height:44px;text-align:left}
+ #mapView.expanded{padding:calc(var(--map-controls-height,160px) + 12px) 12px 16px;inset:0;overflow:auto;height:100dvh}
+ body:has(.expanded) .map-options{position:fixed;top:0;left:0;right:0;height:auto;z-index:31;margin:0;padding:12px;background:var(--paper)}
+ #mapView.expanded #mapCanvas{height:55svh}
+ #mapView.expanded aside{max-height:none}
+ #closeAbout{position:sticky;top:0;background:var(--paper-light);min-width:44px;min-height:44px}
+}

@@ -689,6 +689,29 @@
     width: 100%;
     margin-bottom: 6px;
   }
+
+  html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  .library-save-row input { min-width:0; }
+  .library-drawer:not(.open) { visibility:hidden; }
+  body:has(.library-drawer.open),body:has(.modal:not([hidden])) { overflow:hidden; }
+  @media(max-width:768px){
+    .btn,select,input:not([type=range]),textarea{font-size:16px;min-height:44px}
+    .btn-small,.btn-medium{min-height:44px}
+    .deck,.faceplate,.tab-section{padding:18px 14px}
+    .faceplate .brand{flex-wrap:wrap}
+    .file-controls{gap:12px}
+    .library-drawer{width:100%;max-width:100%;height:100dvh}
+    .library-save-row{flex-wrap:wrap}
+    .library-save-row input{flex-basis:100%}
+    .library-list{overscroll-behavior:contain}
+    .modal-card{max-height:calc(100dvh - 24px);overflow:auto;padding:20px}
+    .tab-scroll{overscroll-behavior-x:contain}
+    .control{min-width:0}
+    .bpm-row{flex-wrap:wrap;gap:8px}
+    .tab-toolbar .control>span{flex-wrap:wrap}
+    .tab-toolbar .btn{white-space:normal}
+    .file-name{overflow-wrap:anywhere}
+  }
 </style>
 <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"></head>
 <body>
@@ -931,7 +954,7 @@
 <div id="libraryBackdrop" class="library-backdrop"></div>
 <div id="libraryDrawer" class="library-drawer">
   <div class="library-header">
-    <h2>My Tabs</h2>
+    <button id="libraryClose" class="btn btn-small" type="button" aria-label="Close saved tabs" style="float:right;">Close ×</button><h2>My Tabs</h2>
     <div class="library-save-row">
       <input id="librarySaveTitle" type="text" placeholder="Tab title..." maxlength="80">
       <button id="librarySaveBtn" class="btn btn-small btn-primary">Save</button>
@@ -2695,6 +2718,7 @@
     else openLibrary();
   });
   libraryBackdrop.addEventListener('click', closeLibrary);
+  document.getElementById('libraryClose').addEventListener('click', closeLibrary);
 
   librarySaveBtn.addEventListener('click', () => {
     if (notes.length === 0) { alert('No notes to save. Add some notes first.'); return; }

@@ -1,7 +1,8 @@
 'use strict';
 const D=window.AO_DATA,$=s=>document.querySelector(s),N=new Map(D.nodes.map(n=>[n.id,n])),S=new Map(D.sections.map(s=>[s.id,s]));
 const roman=['','I','II','III','IV'], colors=['','#63734e','#9a644d','#557e87','#8c7288'],partNames=['','The desiring-machines','Psychoanalysis & familialism','Social machines','Introduction to schizoanalysis'];
-let mapMode='master',showThreads=false;
+const phoneLayout=matchMedia('(max-width:760px)');
+let mapMode=phoneLayout.matches?'curated':'master',showThreads=false;
 let chosen=null,hovered=null,part=0,view='map',positions=new Map(),visible=[],scale=1,pan={x:0,y:0},paused=matchMedia('(prefers-reduced-motion: reduce)').matches,sectionId=D.sections[0].id;
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -55,9 +56,43 @@ function renderNotes(){let available=D.sections.filter(s=>!part||s.part===part);
 function search(){const q=$('#search').value.toLowerCase().trim(),box=$('#results');if(!q){box.hidden=true;return;}box.hidden=false;let concepts=D.nodes.filter(n=>(!part||n.part===part||n.returns.includes(part))&&(n.label.toLowerCase().includes(q)||n.definition.toLowerCase().includes(q))).sort((a,b)=>Number(b.label.toLowerCase().includes(q))-Number(a.label.toLowerCase().includes(q)));let sections=D.sections.filter(s=>(!part||s.part===part)&&(s.text.toLowerCase().includes(q)||s.title.toLowerCase().includes(q)));box.innerHTML=`<p>${concepts.length} concepts · ${sections.length} source sections${!concepts.length&&!sections.length?' — try a related word or clear the part filter.':''}</p><div class="resultgrid">${concepts.map(n=>`<button data-go="${n.id}">${esc(n.label)}<small>PART ${roman[n.part]} · ${related(n.id).filter(e=>e.kind!=='spiral').length} RELATIONS</small></button>`).join('')}${sections.map(s=>`<button data-section="${s.id}">${esc(s.title)}<small>SOURCE PASSAGE · PART ${roman[s.part]}</small></button>`).join('')}</div>`;box.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>select(b.dataset.go));box.querySelectorAll('[data-section]').forEach(b=>b.onclick=()=>{box.hidden=true;openSection(b.dataset.section);});}
 $('#search').addEventListener('input',search);$('#part').onchange=()=>{part=+$('#part').value;chosen=null;if(mapMode==='master')illuminate(null);else layout();renderDetail();if(view==='notes')renderNotes();search();};document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.dataset.view));$('#zoomIn').onclick=()=>zoom(1.3);$('#zoomOut').onclick=()=>zoom(1/1.3);$('#fit').onclick=()=>fit(true);$('#overview').onclick=()=>{mapMode='master';$('#mapMode').value='master';part=0;$('#part').value='0';chosen=null;layout();renderDetail();};$('#about').onclick=()=>$('#aboutDialog').showModal();$('#closeAbout').onclick=()=>$('#aboutDialog').close();
 function motion(){document.body.classList.toggle('paused',paused);$('#motion').textContent=paused?'resume movement':'pause movement';$('#motion').setAttribute('aria-pressed',String(paused));}$('#motion').onclick=()=>{paused=!paused;motion();};motion();
-let drag=null;const canvas=$('#mapCanvas');canvas.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;drag={x:ev.clientX,y:ev.clientY,px:pan.x,py:pan.y};canvas.setPointerCapture(ev.pointerId);});canvas.addEventListener('pointermove',ev=>{if(!drag)return;pan={x:drag.px+ev.clientX-drag.x,y:drag.py+ev.clientY-drag.y};transform();});canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);canvas.addEventListener('wheel',ev=>{if(ev.ctrlKey||ev.metaKey){ev.preventDefault();zoom(ev.deltaY<0?1.08:1/1.08);}}, {passive:false});
-addEventListener('keydown',ev=>{if(ev.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){ev.preventDefault();$('#search').focus();}if(ev.key==='Escape'){$('#results').hidden=true;if($('#aboutDialog').open)$('#aboutDialog').close();else if(chosen)reset();}});new ResizeObserver(()=>{if(view==='map')transform();}).observe(canvas);
-renderDetail();layout();let hash=new URLSearchParams(location.hash.slice(1)).get('concept');if(hash&&N.has(hash))select(hash);
+let drag=null;
+const canvas=$('#mapCanvas'), touchMap=$('#touchMap'), pointers=new Map();
+touchMap.onclick=()=>{
+ const active=canvas.classList.toggle('map-interactive');
+ touchMap.setAttribute('aria-pressed',String(active));
+ touchMap.textContent=active?'done moving':'move map';
+ pointers.clear();drag=null;
+};
+function beginGesture(){
+ const points=[...pointers.values()];
+ if(!points.length){drag=null;return;}
+ const a=points[0],b=points[1]||a;
+ drag={x:(a.x+b.x)/2,y:(a.y+b.y)/2,px:pan.x,py:pan.y,scale,
+  distance:points.length>1?Math.hypot(b.x-a.x,b.y-a.y):0};
+}
+canvas.addEventListener('pointerdown',ev=>{
+ if(ev.target.closest('.mini-wrap')||(ev.pointerType!=='touch'&&ev.target.closest('button')))return;
+ if(ev.pointerType==='touch'&&phoneLayout.matches&&!canvas.classList.contains('map-interactive'))return;
+ pointers.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+ if(ev.pointerType!=='touch')canvas.setPointerCapture(ev.pointerId);beginGesture();
+});
+canvas.addEventListener('pointermove',ev=>{
+ if(!drag||!pointers.has(ev.pointerId))return;
+ pointers.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+ if(ev.pointerType==='touch'&&(pointers.size>1||Math.hypot(ev.clientX-drag.x,ev.clientY-drag.y)>6))canvas.setPointerCapture(ev.pointerId);
+ const points=[...pointers.values()],a=points[0],b=points[1]||a;
+ const x=(a.x+b.x)/2,y=(a.y+b.y)/2,rect=canvas.getBoundingClientRect();
+ const next=drag.distance?Math.max(.07,Math.min(3,drag.scale*Math.hypot(b.x-a.x,b.y-a.y)/drag.distance)):drag.scale;
+ const ratio=next/drag.scale;
+ pan={x:x-rect.left-(drag.x-rect.left-drag.px)*ratio,y:y-rect.top-(drag.y-rect.top-drag.py)*ratio};
+ scale=next;transform();
+});
+for(const name of ['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(name,ev=>{if(name==='lostpointercapture'&&ev.target!==canvas)return;pointers.delete(ev.pointerId);beginGesture();});
+canvas.addEventListener('wheel',ev=>{if(ev.ctrlKey||ev.metaKey){ev.preventDefault();zoom(ev.deltaY<0?1.08:1/1.08);}}, {passive:false});
+addEventListener('keydown',ev=>{if(ev.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){ev.preventDefault();$('#search').focus();}if(ev.key==='Escape'){$('#results').hidden=true;if($('#aboutDialog').open)$('#aboutDialog').close();else if(chosen)reset();}});let mapWidth=0;new ResizeObserver(()=>{const width=canvas.clientWidth;if(view==='map'&&width!==mapWidth){mapWidth=width;fit(mapMode==='master');}else if(view==='map')transform();}).observe(canvas);
+new ResizeObserver(()=>document.documentElement.style.setProperty('--map-controls-height',$('#mapOptions').getBoundingClientRect().height+'px')).observe($('#mapOptions'));
+$('#mapMode').value=mapMode;renderDetail();layout();let hash=new URLSearchParams(location.hash.slice(1)).get('concept');if(hash&&N.has(hash))select(hash);
 
 // Self-contained downloads also work in the portable single-file edition.
 for(const [name,content,type] of [['reading-notes.md',D.source,'text/markdown'],['map-data.json',JSON.stringify({nodes:D.nodes,edges:D.edges,sections:D.sections,spirals:D.spirals},null,2),'application/json']]){const url=URL.createObjectURL(new Blob([content],{type}));document.addEventListener('click',e=>{const a=e.target.closest('a');if(a&&a.getAttribute('href')===name){e.preventDefault();const link=document.createElement('a');link.href=url;link.download=name;link.click();}});}

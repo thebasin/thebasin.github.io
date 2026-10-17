@@ -3,7 +3,7 @@ def drawing(name):
  heights={'records':366,'bookshelf':366,'places':276,'films':352}
  if name not in heights:return ''
  h=heights[name]; prefix='drawing-'+name
- image=f'<image href="assets/drawings/{name}-supplied.png" width="400" height="{h}"/>'
+ image=f'<image href="assets/drawings/{name}-supplied.webp" width="400" height="{h}"/>'
  defs='';body=image
  if name=='records':
   defs=f'<clipPath id="{prefix}-disc"><ellipse cx="185" cy="198" rx="114" ry="116"/></clipPath><mask id="{prefix}-base"><rect width="400" height="366" fill="white"/><ellipse cx="185" cy="198" rx="114" ry="116" fill="black"/><path d="M308 61 L339 64 Q354 143 299 257 L267 246 Q323 147 308 61Z" fill="black"/></mask><clipPath id="{prefix}-arm"><path d="M308 61 L339 64 Q354 143 299 257 L267 246 Q323 147 308 61Z" fill="black"/></clipPath>'

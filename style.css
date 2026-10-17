@@ -164,7 +164,7 @@ nav { font-size:15px; }
 .factory-drawing { width:100%; height:auto; max-height:510px; object-fit:contain; }
 .artaud-closing .closing-quote { padding:0; margin:0; }
 .artaud-closing .closing-quote p { font-size:clamp(20px,2.3vw,31px); line-height:1.6; }
-.home main::before,.home main::after { content:""; position:absolute; pointer-events:none; width:180px; height:650px; background:url('assets/drawings/flow-fine.png') center/contain repeat-y; opacity:.14; z-index:-1; animation:ink-tremor 2.7s steps(3,end) infinite; }
+.home main::before,.home main::after { content:""; position:absolute; pointer-events:none; width:180px; height:650px; background:url('assets/drawings/flow-fine.webp') center/contain repeat-y; opacity:.14; z-index:-1; animation:ink-tremor 2.7s steps(3,end) infinite; }
 .home main::before { left:-9%; top:560px; }
 .home main::after { right:-8%; top:790px; transform:rotate(180deg); animation-delay:-1s; }
 @keyframes ink-tremor { 0%,100% { translate:0 0; rotate:0deg; } 22% { translate:.5px -.7px; rotate:.08deg; } 49% { translate:-.7px .3px; rotate:-.09deg; } 76% { translate:.4px .6px; rotate:.05deg; } }
@@ -549,4 +549,63 @@ html.still { scroll-behavior:auto; }
  .lightbox-stage { min-height:0; padding:52px 12px 12px; }
  .lightbox-stage img,.lightbox-stage video { max-height:66vh; }
  .lightbox-notes { padding:20px 22px 24px; }
+}
+
+/* Phone and touch layouts: readable controls and contained scrolling. */
+html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+body:has(dialog[open]) { overflow:hidden; }
+dialog { overscroll-behavior:contain; max-height:calc(100dvh - 32px); }
+@media(max-width:800px) {
+ header { gap:8px 16px; padding:12px 0; min-height:0; }
+ header nav { gap:8px; }
+ header nav a,footer a,.back { display:inline-flex; align-items:center; min-height:44px; }
+ .site-name,.motion-button { min-height:44px; display:inline-flex; align-items:center; }
+ .motion-button { font-size:14px; }
+ input[type=search],select { font-size:16px; min-height:44px; }
+ .catalogue-controls button,.source-links a,.writing-switch a { min-height:44px; display:inline-flex; align-items:center; }
+ .featured-heading { flex-wrap:wrap; gap:8px 20px; }
+ .featured-window { overscroll-behavior-x:contain; scroll-snap-type:x proximity; }
+ .featured-card { scroll-snap-align:start; }
+ .creator,.release-date,.collection-count { font-size:14px; }
+ .detail-layout { min-width:0; }
+ .detail-layout>div { min-width:0; overflow-wrap:anywhere; }
+ .close-dialog { position:sticky; top:0; float:right; z-index:2; margin:-25px -10px 0 0; width:44px; height:44px; background:var(--paper); }
+ .source-links { font-size:13px; }
+ .place-close { width:44px; height:44px; background:#242620; border-radius:50%; }
+ .lightbox-nav button { min-height:44px; font-size:15px; }
+ .place-lightbox { height:calc(100dvh - 24px); }
+ .lightbox-stage img,.lightbox-stage video { max-height:55dvh; }
+ .lightbox-notes { min-width:0; }
+ .project-feature { gap:24px; }
+ .writing-links a { gap:16px; font-size:21px; }
+ .writing-links a span { flex-shrink:0; }
+}
+@media(max-width:600px) {
+ body { padding-left:20px; padding-right:20px; }
+ .basin-opening { padding-top:28px; }
+ .basin-body { display:flex; flex-direction:column; gap:40px; }
+ .basin-index { order:-1; width:100%; padding:0; }
+ .woolf-passage { width:100%; padding:0; }
+ #writings { margin-left:0; }
+ .archive-quote { margin-left:0; }
+ .basin-index .portal .arrow { opacity:1; }
+ .basin-index .archive-children { gap:24px 18px; }
+ .archive-children .portal-title { font-size:clamp(23px,6vw,29px); }
+ .archive-children .portal:nth-child(n) { margin:0; }
+ .compact-disclosure>summary { min-height:48px; }
+ .project-feature h2 { font-size:36px; overflow-wrap:anywhere; }
+ .project-feature { padding-bottom:55px; }
+ .place-index a { min-height:48px; }
+ .place-lightbox { height:100dvh; }
+ .place-card figcaption { gap:8px; }
+ .place-card figcaption time { white-space:normal; }
+ .collection-passage { margin-left:0; }
+ .collection-passage summary { min-height:44px; align-items:center; }
+ .catalogue .page-heading { padding-top:28px; }
+ .page-heading h1 { font-size:clamp(48px,15vw,64px); }
+}
+@media(pointer:coarse) {
+ .sloshing-water { filter:none; }
+ .smoke-plumes { filter:none; opacity:.55; }
+ .desiring-factory .factory-scene { animation:none; }
 }
