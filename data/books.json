@@ -1540,5 +1540,33 @@
     "cover": "assets/covers/book-being-and-time.jpg",
     "artSource": "https://openlibrary.org/isbn/9780061575594",
     "remoteCover": "https://covers.openlibrary.org/b/isbn/9780061575594-L.jpg?default=false"
+  },
+  {
+    "id": "book-genealogy-of-morality",
+    "title": "On the Genealogy of Morality",
+    "creator": "Friedrich Nietzsche",
+    "year": "1887",
+    "publicationDate": "1887",
+    "editionYear": "2023",
+    "genre": "Philosophy",
+    "isbn": "9781551119892",
+    "status": "currently reading",
+    "cover": "assets/covers/book-genealogy-of-morality.jpg",
+    "source": "https://broadviewpress.com/product/on-the-genealogy-of-morality/",
+    "artSource": "https://broadviewpress.com/wp-content/uploads/2026/08/9781551119892.jpg"
+  },
+  {
+    "id": "book-neuter",
+    "title": "Neuter",
+    "creator": "Hélène Cixous",
+    "year": "1972",
+    "publicationDate": "1972",
+    "editionYear": "2004",
+    "genre": "Literary fiction",
+    "isbn": "9780838755907",
+    "status": "currently reading",
+    "cover": "assets/covers/book-neuter.jpg",
+    "source": "https://www1.bucknell.edu/script/upress/book.asp?id=112",
+    "artSource": "https://covers.openlibrary.org/b/isbn/9780838755907-L.jpg?default=false"
   }
 ]

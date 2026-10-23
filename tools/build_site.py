@@ -33,7 +33,8 @@ def featured_section(kind,data):
   result=''
   for entry in picks:
    title=e(entry['title']); cover=e(entry.get('cover',''))
-   result+=f'<article class="featured-card"><button type="button" data-open="{entry["id"]}" aria-label="Details for {title}"'+(' tabindex="-1"' if duplicate else '')+f'><span class="featured-art"><img src="{cover}" alt="{title}" decoding="async"></span><span class="featured-title">{title}</span><span class="featured-creator">{e(entry["creator"])}</span></button></article>'
+   status=f'<span class="featured-creator reading-status">{e(entry["status"])}</span>' if entry.get('status') else ''
+   result+=f'<article class="featured-card"><button type="button" data-open="{entry["id"]}" aria-label="Details for {title}"'+(' tabindex="-1"' if duplicate else '')+f'><span class="featured-art"><img src="{cover}" alt="{title}" decoding="async"></span><span class="featured-title">{title}</span><span class="featured-creator">{e(entry["creator"])}</span>{status}</button></article>'
   return result
  text=e(config.get('quote','')).replace('\n','<br>')
  return f'<p class="collection-subtitle">{e(config["subtitle"])}</p><details class="collection-passage"><summary>a passage kept <span>↗</span></summary><blockquote class="collection-quote"><p>{text}</p><cite>{e(config["attribution"])}</cite></blockquote></details><section class="featured-section" aria-labelledby="featured-heading"><div class="featured-heading"><h2 id="featured-heading">On my mind lately</h2><span>featured · {len(picks)}</span></div><div class="featured-window" tabindex="0" aria-label="Featured selections; scroll to browse"><div class="featured-track" style="--pan-duration:{len(picks)*16}s"><div class="featured-set">{cards()}</div></div></div></section><h2 class="full-collection-heading">The collection</h2>'
@@ -53,6 +54,7 @@ def catalogue(name,kind):
    eid=entry['id'];title=e(entry['title']);creator=e(entry['creator']);year=e(entry.get('publicationDate',entry.get('year')) or 'Date unconfirmed');cover=entry.get('cover')
    image=f'<img src="{e(cover)}" alt="{title} — '+('poster' if kind=='films' else 'cover')+'" loading="lazy" decoding="async">' if cover else f'<span class="cover-unavailable"><span>{title}</span><small>Artwork not yet located</small></span>'
    html+=f'<article class="shelf-item" data-search="{e(entry["title"]+" "+entry["creator"])}" data-genre="{e(genre)}"><button class="cover-button" type="button" data-open="{eid}" aria-label="Details for {title}"><span class="cover-frame">{image}</span></button><h3><button type="button" data-open="{eid}">{title}</button></h3><p class="creator">{creator}</p><p class="release-date">{year}</p>'
+   if entry.get('status'):html+=f'<p class="creator reading-status">{e(entry["status"])}</p>'
    if entry.get('quote'):html+='<span class="quote-marker">a passage kept ↗</span>'
    html+='</article>'
   html+='</div></section>'
@@ -63,7 +65,10 @@ def catalogue(name,kind):
   if entry.get('cover'):html+=f'<img class="detail-cover" src="{e(entry["cover"])}" alt="{title} cover" loading="lazy">'
   html+=f'<div><span class="detail-genre">{e(entry["genre"])}</span><h2 id="title-{eid}">{title}</h2><p class="detail-creator">{e(entry["creator"])}</p><dl><dt>'+('First published' if kind=='books' else 'Released')+f'</dt><dd>{e(date)}</dd>'
   if entry.get('type'):html+=f'<dt>Format</dt><dd>{e(entry["type"])}</dd>'
-  if entry.get('rating'):html+=f'<dt>My rating</dt><dd aria-label="{entry["rating"]} out of 5 stars">{"★" * entry["rating"]}</dd>'
+  if entry.get('status'):html+=f'<dt>Status</dt><dd>{e(entry["status"])}</dd>'
+  elif entry.get('rating'):
+   rating=entry['rating'];stars='★' * int(rating)+('½' if rating % 1 else '')
+   html+=f'<dt>My rating</dt><dd aria-label="{rating} out of 5 stars">{stars}</dd>'
   html+='</dl>'
   if entry.get('dateNote'):html+=f'<p class="detail-note">{e(entry["dateNote"])}</p>'
   html+=quote(entry.get('quote'))

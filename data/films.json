@@ -492,5 +492,17 @@
     "cover": "assets/covers/film-38.jpg",
     "artSource": "https://en.wikipedia.org/wiki/Whiplash_%282014_film%29",
     "source": "https://en.wikipedia.org/wiki/Whiplash_%282014_film%29"
+  },
+  {
+    "id": "film-39",
+    "title": "Under the Skin",
+    "creator": "Jonathan Glazer",
+    "year": "2013",
+    "genre": "Science fiction & fantasy",
+    "rating": 4.5,
+    "type": "Film",
+    "cover": "assets/covers/film-39.jpg",
+    "source": "https://a24films.com/films/under-the-skin",
+    "artSource": "https://a24films.com/films/under-the-skin"
   }
 ]
