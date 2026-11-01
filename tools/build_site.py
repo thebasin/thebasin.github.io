@@ -1,7 +1,7 @@
 """Build the static site from the curated catalogue JSON files; no network required."""
 from pathlib import Path
 from html import escape as esc
-import json,re
+import json,re,hashlib
 from drawing_markup import drawing as living_art
 ROOT=Path(__file__).resolve().parent.parent
 
@@ -16,7 +16,12 @@ def head(title,bodyclass=''):
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Books, films, records, writings, and projects collected by the basin."><title>{e(title) if title == 'the basin' else e(title) + ' — the basin'}</title><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head>
 <body class="{bodyclass}"><a class="skip" href="#main">Skip to content</a><header id="top"><a class="site-name" href="index.html">the basin</a><nav aria-label="Main navigation"><a href="index.html#archive">archive</a><a href="index.html#writings">writings</a><a href="index.html#projects">projects</a></nav><button class="motion-button" id="motion" type="button" aria-pressed="false" hidden>pause movement</button></header>'''
 def foot():return '<footer><a href="index.html">the basin</a><a href="#top">↑ back to top</a></footer></body></html>'
-def write(name,content): (ROOT/name).write_text(content)
+def write(name,content):
+ # Refresh the drawing styles when an already-open page receives the new eye.
+ if 'class="question-eye"' in content:
+  version=hashlib.sha256((ROOT/'style.css').read_bytes()).hexdigest()[:10]
+  content=re.sub(r'href="((?:../)?style\.css)"', lambda m: f'href="{m[1]}?v={version}"', content)
+ (ROOT/name).write_text(content)
 def tile(title,url,drawing,number):return f'<a class="portal" href="{url}">{art(drawing)}<span class="portal-label"><span class="number">{number}</span><span class="portal-title">{title}</span><span class="arrow">↗</span></span></a>'
 home = (ROOT/'data/home.html').read_text().replace('{{FIGURES}}', (ROOT/'data/background.html').read_text())
 archive = ''.join(tile(name, name+'.html', name, '0'+str(i+1)) for i,name in enumerate(['bookshelf','films','places','records']))
