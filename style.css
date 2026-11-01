@@ -642,3 +642,29 @@ dialog { overscroll-behavior:contain; max-height:calc(100dvh - 32px); }
 .splice-fold[open] .splice-fold-label { display:inline; }
 .splice-fold[open] .splice-fold-sign { transform:rotate(45deg); }
 .splice-fold .splice-poem { margin-top:30px; }
+
+/* A small ink eye, sitting in the sentence like another drawn inhabitant. */
+.question-eye { display:inline-block; width:3em; height:1.74em; vertical-align:-.54em; margin:0 .16em; color:var(--ink); overflow:visible; }
+.eye-crease { stroke-width:.65; opacity:.4; }
+.eye-lid { stroke-width:1.35; animation:ink-eye-blink 7.4s ease-in-out infinite; }
+.eye-echo { stroke-width:.55; opacity:.48; }
+.eye-iris { stroke-width:.9; }
+.eye-hatching { stroke-width:.65; opacity:.75; }
+.eye-pupil { fill:currentColor; stroke-width:.8; }
+.eye-glint { stroke:var(--paper); stroke-width:2; }
+.eye-aperture { transform-origin:50px 29px; animation:ink-eye-aperture 7.4s ease-in-out infinite; }
+.eye-glance { animation:ink-eye-look 13.6s ease-in-out infinite; }
+@keyframes ink-eye-blink {
+ 0%,42%,46%,100% { d:path('M7 30 C28 6 65 3 93 28 C71 51 32 53 7 30Z'); }
+ 44% { d:path('M7 30 C28 30 65 31 93 28 C71 32 32 33 7 30Z'); }
+}
+@keyframes ink-eye-aperture { 0%,42%,46%,100% { transform:scaleY(1); opacity:1; } 44% { transform:scaleY(.02); opacity:0; } }
+@keyframes ink-eye-look {
+ 0%,12%,100% { transform:translate(0,0); }
+ 22%,32% { transform:translate(-9px,1px); }
+ 43%,50% { transform:translate(4px,-3px); }
+ 65%,75% { transform:translate(9px,2px); }
+ 87%,92% { transform:translate(-3px,-1px); }
+}
+.still .question-eye * { animation:none!important; }
+@media(prefers-reduced-motion:reduce) { .question-eye * { animation:none!important; } }

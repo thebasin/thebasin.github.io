@@ -81,7 +81,7 @@
     "category": "fiction",
     "date": "October, 2026",
     "datetime": "2026-10",
-    "blurb": "Where does the ‘I’ happen?",
+    "blurb": "Where does the <svg class=\"question-eye\" viewBox=\"0 0 100 58\" role=\"img\" aria-label=\"eye\"><title>eye</title><g fill=\"none\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path class=\"eye-crease\" d=\"M10 22 Q30 3 49 7 Q72 5 91 23 M17 40 Q48 59 83 39\"/><g class=\"eye-aperture\"><g class=\"eye-glance\"><path class=\"eye-iris\" d=\"M66 28 C67 38 60 47 50 46 C40 47 32 39 33 29 C32 19 41 11 51 12 C61 11 67 20 66 28Z\"/><path class=\"eye-hatching\" d=\"M61.0 29.0L66.0 29.4 M61.1 32.4L65.5 34.2 M60.1 35.9L63.5 38.7 M56.9 37.6L60.2 42.5 M54.2 39.8L55.5 44.0 M50.9 41.2L50.8 45.3 M47.6 39.7L45.9 45.1 M44.2 39.0L41.2 43.4 M41.1 37.3L38.0 39.6 M40.1 33.8L35.1 35.7 M38.5 30.7L33.5 31.1 M37.9 27.2L33.4 26.1 M40.1 24.2L35.8 21.7 M41.5 21.1L38.3 17.6 M43.9 18.4L42.1 14.4 M47.6 18.3L46.7 12.4 M50.9 17.4L51.6 13.1 M54.5 17.6L56.3 14.0 M56.9 20.4L60.7 16.3 M59.6 22.5L64.2 19.8 M61.7 25.4L65.4 24.7\"/><path class=\"eye-pupil\" d=\"M56 29 C57 34 54 38 49 37 C44 38 42 33 43 29 C42 24 46 21 50 22 C54 21 57 25 56 29Z\"/><path class=\"eye-glint\" d=\"M47 25 l2 -1\"/></g></g><path class=\"eye-lid\" d=\"M7 30 C28 6 65 3 93 28 C71 51 32 53 7 30Z\"/><path class=\"eye-lid eye-echo\" d=\"M9 31 C30 8 66 5 91 28 C68 50 33 51 9 31Z\"/></g></svg> happen?",
     "minutes": 2,
     "sections": [],
     "readerClass": "splice-reader"
