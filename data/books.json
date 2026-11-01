@@ -1564,9 +1564,23 @@
     "editionYear": "2004",
     "genre": "Literary fiction",
     "isbn": "9780838755907",
-    "status": "currently reading",
     "cover": "assets/covers/book-neuter.jpg",
     "source": "https://www1.bucknell.edu/script/upress/book.asp?id=112",
-    "artSource": "https://covers.openlibrary.org/b/isbn/9780838755907-L.jpg?default=false"
+    "artSource": "https://covers.openlibrary.org/b/isbn/9780838755907-L.jpg?default=false",
+    "rating": 4.5
+  },
+  {
+    "id": "book-nietzsche-and-philosophy",
+    "title": "Nietzsche and Philosophy",
+    "creator": "Gilles Deleuze",
+    "year": "1962",
+    "publicationDate": "1962",
+    "editionYear": "2006",
+    "genre": "Philosophy",
+    "isbn": "9780231138772",
+    "status": "currently reading",
+    "cover": "assets/covers/book-nietzsche-and-philosophy.jpg",
+    "source": "https://cup.columbia.edu/book/nietzsche-and-philosophy/9780231138772/",
+    "artSource": "https://covers.openlibrary.org/b/isbn/9780231138772-L.jpg?default=false"
   }
 ]

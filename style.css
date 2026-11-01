@@ -1,28 +1,29 @@
 :root { --paper:#e8dac2; --ink:#272922; --muted:#636659; --line:#cccbbd; --accent:#65714d; }
-/* A small window into the Anti-Oedipus reading map. */
-.ao-feature { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr); gap:clamp(28px,5vw,78px); align-items:center; margin:0 0 85px; padding:30px 0 36px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.ao-preview { display:block; min-width:0; color:#65714d; background:radial-gradient(ellipse at 48% 45%,#f6edda99,transparent 70%); border:1px solid #887b5c44; padding:18px 20px 12px; transition:border-color .3s,background-color .3s; }
-.ao-preview:hover { text-decoration:none; border-color:#65714d; background-color:#f6edda55; }
-.ao-preview svg { display:block; width:100%; height:auto; margin:4px 0 8px; overflow:visible; }
-.ao-preview-caption,.ao-preview-bottom { display:flex; justify-content:space-between; align-items:center; gap:12px; font:italic 12px Georgia,serif; color:var(--muted); }
-.ao-preview-caption { font-style:normal; letter-spacing:.08em; font-size:10px; text-transform:uppercase; }
-.ao-preview-bottom>span { font-style:normal; font-size:22px; }
-.ao-preview-threads { stroke:#697754; stroke-dasharray:4 7; animation:ao-current 36s linear infinite; }
-.ao-preview-threads path:nth-child(2),.ao-preview-threads path:nth-child(3) { stroke:#8d6b70; }
-.ao-preview-threads path:nth-child(4) { stroke:#557e87; }
-.ao-preview-labels { font:14px Georgia,serif; fill:var(--ink); paint-order:stroke; stroke:var(--paper); stroke-width:6px; stroke-linejoin:round; }
-.ao-preview-center { font-size:19px; font-style:italic; }
-.ao-preview-small { font-size:12px; }
-.ao-preview-gloss { font:italic 11px Georgia,serif; fill:var(--muted); }
-.ao-feature-eyebrow { margin:0 0 16px; color:var(--accent); font:10px Arial,sans-serif; text-transform:uppercase; letter-spacing:.14em; }
-.ao-feature h2 { margin:0 0 22px; font-size:clamp(36px,4vw,58px); font-weight:400; letter-spacing:-.045em; line-height:1.08; }
-.ao-feature h2 em { font-weight:400; }
-.ao-feature h2>span { display:block; font-size:21px; color:var(--muted); letter-spacing:0; font-style:italic; margin-top:9px; }
-.ao-feature-copy>p:not(.ao-feature-eyebrow) { font-size:16px; line-height:1.7; color:var(--muted); max-width:360px; }
-.ao-feature-link { display:flex; justify-content:space-between; gap:20px; width:fit-content; padding:9px 0; border-bottom:1px solid var(--accent); font-size:16px; margin-top:20px; }
-.ao-drawing-link { display:block; width:fit-content; margin-top:14px; font-size:13px; color:var(--muted); }
-@keyframes ao-current { to { stroke-dashoffset:-220; } }
-@media(max-width:760px) { .ao-feature { grid-template-columns:1fr; gap:26px; margin-bottom:48px; padding-top:24px; } .ao-feature-copy { padding:0 6px; } .ao-feature-copy>p:not(.ao-feature-eyebrow) { max-width:480px; } .ao-feature h2 { font-size:44px; } .ao-preview { padding:15px 10px 10px; } }
+/* Two currents of language, set into the paper of the basin. */
+.splice-feature { max-width:850px; margin:0 auto 85px; padding:32px 0; border-block:1px solid var(--line); }
+.splice-feature-heading { margin-bottom:32px; }
+.splice-eyebrow { color:var(--accent); font:10px Arial,sans-serif; text-transform:uppercase; letter-spacing:.14em; }
+.splice-feature h2 { font-size:clamp(34px,4vw,48px); font-weight:400; letter-spacing:-.04em; margin:14px 0 0; }
+.splice-poem { --verse-leading:1.65em; display:grid; grid-template-columns:1fr 1fr; font-size:clamp(15px,1.6vw,19px); line-height:var(--verse-leading); background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(var(--verse-leading) - 1px),#777d681c calc(var(--verse-leading) - 1px),#777d681c var(--verse-leading)); }
+.splice-poem p { margin:0; }
+.splice-left { text-align:right; padding-right:12px; border-right:1px solid #778075; }
+.splice-right { padding-left:12px; padding-top:var(--verse-leading); }
+.splice-poem .splice-heat { margin-top:calc(var(--verse-leading) * 15); }
+.splice-overprint { position:relative; }
+.splice-dd { position:absolute; bottom:1.05em; left:0; font-size:.625em; line-height:1; }
+.splice-read { display:flex; justify-content:space-between; max-width:160px; margin:28px 0 0 auto; padding:8px 0; border-bottom:1px solid var(--accent); font-size:14px; }
+.splice-reader .reading-prose { max-width:850px; }
+.splice-reader .reading-prose .splice-poem p { margin-bottom:0; }
+.splice-reader .reading-prose .splice-heat { margin-top:calc(var(--verse-leading) * 15); }
+@media(max-width:700px) {
+ .splice-feature { margin-bottom:48px; }
+ .splice-poem { font-size:16px; }
+ .splice-poem br { display:none; }
+ .splice-left { padding-right:10px; }
+ .splice-right { padding-left:10px; display:flex; flex-direction:column; justify-content:space-between; padding-bottom:var(--verse-leading); }
+ .splice-poem .splice-heat,.splice-reader .reading-prose .splice-heat { margin-top:2em; }
+}
+@media print { .splice-poem { font-size:11pt; } }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:28px; }
 body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,'Times New Roman',serif; padding:0 clamp(22px,6vw,100px); -webkit-font-smoothing:antialiased; }
@@ -633,3 +634,11 @@ dialog { overscroll-behavior:contain; max-height:calc(100dvh - 32px); }
  .smoke-plumes { filter:none; opacity:.55; }
  .desiring-factory .factory-scene { animation:none; }
 }
+
+.splice-abstract { max-width:560px; font-size:18px; line-height:1.75; color:var(--muted); margin:0 0 24px; }
+.splice-fold summary { display:flex; align-items:center; justify-content:space-between; gap:32px; width:fit-content; padding:10px 0; border-bottom:1px solid var(--accent); cursor:pointer; font-size:15px; list-style:none; }
+.splice-fold summary::-webkit-details-marker { display:none; }
+.splice-fold-label,.splice-fold[open] .splice-unfold-label { display:none; }
+.splice-fold[open] .splice-fold-label { display:inline; }
+.splice-fold[open] .splice-fold-sign { transform:rotate(45deg); }
+.splice-fold .splice-poem { margin-top:30px; }

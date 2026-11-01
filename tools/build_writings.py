@@ -26,7 +26,7 @@ def build_writings(root, head, foot, write):
     for entry in entries:
         category = entry['category']
         # Reading pages live one directory beneath the site shell.
-        shell = re.sub(r'(href|src)="(?!https?:|#)([^"]+)"', r'\1="../\2"', head(entry['title'], 'writing-reader'))
+        shell = re.sub(r'(href|src)="(?!https?:|#)([^"]+)"', r'\1="../\2"', head(entry['title'], ' '.join(filter(None, ['writing-reader', entry.get('readerClass')]))))
         description = re.sub('<[^>]+>', '', entry['blurb'])
         shell = shell.replace('Books, films, records, writings, and projects collected by the basin.', escape(description, quote=True))
         html = shell + f'<main id="main"><article><div class="reading-heading"><a class="back" href="../{category}.html">← {category}</a>{metadata(entry)}<h1>{escape(entry["title"])}</h1><p class="reading-deck">{entry["blurb"]}</p></div>'

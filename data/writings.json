@@ -76,46 +76,14 @@
     "sections": []
   },
   {
-    "slug": "laundering-precedent",
-    "title": "Laundering Precedent - The Dogmatism of Stare Decisis",
-    "category": "essays",
-    "date": "May, 2026",
-    "datetime": "2026-05",
-    "blurb": "A philosophical critique of stare decisis as a machine for laundering historical judgment into neutral authority—asking what happens when the law mistakes repetition for justice and lets the past govern the present.",
-    "minutes": 13,
-    "sections": [
-      {
-        "title": "Introduction",
-        "id": "section-1"
-      },
-      {
-        "title": "Stare Decisis Launders Historical Injustice",
-        "id": "section-2"
-      },
-      {
-        "title": "Stare Decisis Suppresses the Particularity of Cases",
-        "id": "section-3"
-      },
-      {
-        "title": "Stare Decisis Destroys Paths for Moral Learning in Law",
-        "id": "section-4"
-      },
-      {
-        "title": "Alternatives",
-        "id": "section-5"
-      },
-      {
-        "title": "Objections",
-        "id": "section-6"
-      },
-      {
-        "title": "Conclusion",
-        "id": "section-7"
-      },
-      {
-        "title": "Works Cited",
-        "id": "section-8"
-      }
-    ]
+    "slug": "spliticed",
+    "title": "Spl(it)iced",
+    "category": "fiction",
+    "date": "October, 2026",
+    "datetime": "2026-10",
+    "blurb": "A clock freezes, a room melts, and two currents of language split and splice.",
+    "minutes": 2,
+    "sections": [],
+    "readerClass": "splice-reader"
   }
 ]
