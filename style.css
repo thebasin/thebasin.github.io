@@ -674,7 +674,7 @@ dialog { overscroll-behavior:contain; max-height:calc(100dvh - 32px); }
 .jazz-copy .splice-feature-heading { margin-bottom:20px; }
 .jazz-copy .splice-abstract { margin:0; font-size:17px; }
 .jazz-drawing { margin:0 -12px 0 0; transform-origin:55% 85%; animation:jazz-breath 8s ease-in-out infinite; }
-.jazz-drawing img { display:block; width:100%; height:auto; mix-blend-mode:multiply; }
+.jazz-drawing svg { display:block; width:100%; height:auto; overflow:visible; }
 .jazz-fold > summary { box-sizing:border-box; width:100%; min-height:56px; border-block:1px solid var(--line); padding:16px 0; }
 .jazz-fold summary small { margin-left:16px; font:10px Arial,sans-serif; letter-spacing:.08em; color:var(--muted); white-space:nowrap; }
 .jazz-fold summary:hover { color:var(--accent); }
