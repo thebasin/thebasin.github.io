@@ -85,5 +85,15 @@
     "minutes": 2,
     "sections": [],
     "readerClass": "splice-reader"
+  },
+  {
+    "slug": "jazz",
+    "title": "Jazz",
+    "category": "fiction",
+    "date": "November, 2026",
+    "datetime": "2026-11",
+    "blurb": "The tide breathes in and out, sand black as night. At each inhalation, the rocks filter its breath, crackling together, grinding away.",
+    "minutes": 5,
+    "sections": []
   }
 ]
