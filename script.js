@@ -480,3 +480,14 @@ function moveFigures(now) {
   if (travellers.length || water) requestAnimationFrame(moveFigures);
 }
 if (travellers.length || water) requestAnimationFrame(moveFigures);
+
+// Return readers to the cover after closing the long homepage story.
+document.querySelectorAll('.jazz-close').forEach(button => {
+  button.addEventListener('click', () => {
+    const fold = button.closest('details');
+    fold.open = false;
+    const summary = fold.querySelector('summary');
+    summary.focus({ preventScroll: true });
+    summary.scrollIntoView({ block: 'center', behavior: 'instant' });
+  });
+});

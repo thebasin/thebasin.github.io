@@ -668,3 +668,30 @@ dialog { overscroll-behavior:contain; max-height:calc(100dvh - 32px); }
 }
 .still .question-eye * { animation:none!important; }
 @media(prefers-reduced-motion:reduce) { .question-eye * { animation:none!important; } }
+
+/* Jazz: an illustrated cover that opens into a quiet reading column. */
+.jazz-intro { display:grid; grid-template-columns:1fr 1.15fr; align-items:center; gap:24px; padding:8px 0 30px; }
+.jazz-copy .splice-feature-heading { margin-bottom:20px; }
+.jazz-copy .splice-abstract { margin:0; font-size:17px; }
+.jazz-drawing { margin:0 -12px 0 0; transform-origin:55% 85%; animation:jazz-breath 8s ease-in-out infinite; }
+.jazz-drawing img { display:block; width:100%; height:auto; mix-blend-mode:multiply; }
+.jazz-fold > summary { box-sizing:border-box; width:100%; min-height:56px; border-block:1px solid var(--line); padding:16px 0; }
+.jazz-fold summary small { margin-left:16px; font:10px Arial,sans-serif; letter-spacing:.08em; color:var(--muted); white-space:nowrap; }
+.jazz-fold summary:hover { color:var(--accent); }
+.jazz-fold summary:focus-visible,.jazz-end a:focus-visible,.jazz-close:focus-visible { outline:2px solid var(--accent); outline-offset:5px; }
+.jazz-fold .splice-fold-sign { font-size:22px; font-weight:300; transition:transform .25s ease; }
+.jazz-unfolded { padding:40px 24px 4px; }
+.jazz-end { max-width:680px; margin:36px auto 0; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:24px; font-size:14px; }
+.jazz-close { border:0; padding:8px 0; color:inherit; font:inherit; background:none; cursor:pointer; }
+.jazz-end a { padding:8px 0; }
+.jazz-end span { margin-left:8px; }
+@keyframes jazz-breath { 0%,100% { transform:translateY(0) rotate(-.3deg) scaleY(1); } 50% { transform:translateY(-3px) rotate(.25deg) scaleY(1.012); } }
+.still .jazz-drawing { animation:none; }
+@media(max-width:600px) {
+ .jazz-intro { grid-template-columns:1fr; gap:20px; padding-bottom:20px; }
+ .jazz-drawing { width:100%; max-width:420px; margin:0 auto; }
+ .jazz-unfolded { padding:28px 0 0; }
+ .jazz-end { gap:12px; font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) { .jazz-drawing { animation:none; } .jazz-fold .splice-fold-sign { transition:none; } }
+.jazz-feature:has(.jazz-fold[open]) .splice-abstract { display:none; }

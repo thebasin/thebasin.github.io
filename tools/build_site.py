@@ -18,7 +18,7 @@ def head(title,bodyclass=''):
 def foot():return '<footer><a href="index.html">the basin</a><a href="#top">↑ back to top</a></footer></body></html>'
 def write(name,content):
  # Refresh the drawing styles when an already-open page receives the new eye.
- if 'class="question-eye"' in content:
+ if 'class="question-eye"' in content or 'jazz-feature' in content:
   version=hashlib.sha256((ROOT/'style.css').read_bytes()).hexdigest()[:10]
   content=re.sub(r'href="((?:../)?style\.css)"', lambda m: f'href="{m[1]}?v={version}"', content)
  (ROOT/name).write_text(content)
